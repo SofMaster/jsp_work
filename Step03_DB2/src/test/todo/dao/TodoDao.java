@@ -26,7 +26,7 @@ public class TodoDao {
 		try {
 			conn = new DbcpBean().getConn();
 			String sql = "Insert Into todo"
-					+ " (num,content,start_date,final_date,regdate)"
+					+ " (num,content,TO_DATE(start_date,'YY.MM.DD HH24:MI') AS start_date,TO_DATE(final_date,'YY.MM.DD HH24:MI') AS final_date,regdate)"
 					+ " VALUES(todo_seq.NEXTVAL, ?, ?, ?, SYSDATE)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getContent());
@@ -57,7 +57,7 @@ public class TodoDao {
 		try {
 			conn=new DbcpBean().getConn();
 			String sql="UPDATE todo"
-					+ " SET content=?, start_date=?, final_date=?,regdate=SYSDATE"
+					+ " SET content=?, TO_DATE(start_date,'YY.MM.DD HH24:MI') AS start_date=?, TO_DATE(final_date,'YY.MM.DD HH24:MI') AS final_date=?,regdate=SYSDATE"
 					+ " WHERE num=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getContent());
@@ -118,7 +118,7 @@ public class TodoDao {
 		ResultSet rs = null;
 		try {
 			conn = new DbcpBean().getConn();
-			String sql = "SELECT content,start_date,final_date,regdate"
+			String sql = "SELECT content,TO_CHAR(start_date,'YY.MM.DD') AS start_date,TO_CHAR(final_date,'YY.MM.DD') AS final_date,TO_CHAR(regdate,'YY.MM.DD') AS regdate"
 					+ " FROM todo"
 					+ " WHERE num=?";
 			pstmt = conn.prepareStatement(sql);
@@ -155,7 +155,7 @@ public class TodoDao {
 		      ResultSet rs = null;
 		      try {
 		         conn = new DbcpBean().getConn();
-		         String sql = "SELECT num,content,start_date,final_date,regdate"
+		         String sql = "SELECT num,content,TO_CHAR(start_date,'YY.MM.DD HH24:MI') AS start_date,TO_CHAR(final_date,'YY.MM.DD HH24:MI') AS final_date,TO_CHAR(regdate,'YY.MM.DD HH24:MI') AS regdate"
 							+ " FROM todo"
 							+ " ORDER BY num ASC";
 		         pstmt = conn.prepareStatement(sql);

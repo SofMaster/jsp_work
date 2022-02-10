@@ -18,13 +18,13 @@
 	<%if(isSuccess) {%>
 	<script>
 		//알림창 띄우기
-		alert("삭제 했습니다.")
+		alert("Successfully Delete!")
 		//목록보기로 이동 시키기
 		location.href="list.jsp";
 	</script>
 	<%} else{ %>
 	<script>
-		alert("삭제 실패");
+		alert("Failure Delete!");
 		location.href="list.jsp";
 	</script>	
 	<%} %>
