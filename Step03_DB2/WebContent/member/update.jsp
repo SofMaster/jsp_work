@@ -29,7 +29,7 @@
 	<%}else{ %>
 		<script>
 			alert("업데이트 실패!")
-			location.href="updateform.jsp"
+			location.href="updateform.jsp?num=<%=num %>"
 		</script>
 	<%} %>
 </body>	
