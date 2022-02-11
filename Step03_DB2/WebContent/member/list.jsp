@@ -33,6 +33,19 @@
    MemberDao dao=MemberDao.getInstance();
    //회원 목록 얻어오기 
    List<MemberDto> list=dao.getList(dto);
+   
+ 	//하단 시작 페이지 번호 
+   int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
+   //하단 끝 페이지 번호
+   int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
+   
+   //전체 row 의 갯수
+   int totalRow=MemberDao.getInstance().getCount();
+   //전체 page의 갯수 구하기
+   int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+   if(endPageNum > totalPageCount){
+	   endPageNum=totalPageCount;
+   }
 %>    
 
 <!DOCTYPE html>
@@ -90,14 +103,23 @@
 			</tbody>
 		</table>
 		<ul class="pagination">
-			<%for(int i=1;i<6;i++){ %>
+			<%if(startPageNum !=1){ %>
+			<li class="page-item"><a class="page-link" href="list.jsp?pageNum=<%=startPageNum-1%>">Prev</a></li>
+			<%}else{ %>
+			<li class="page-item disabled"><a class="page-link" href="list.jsp?pageNum=<%=startPageNum-1%>">Prev</a></li>
+			<%} %>
+			
+			<%for(int i=startPageNum;i<=endPageNum;i++){ %>
 				<li class="page-item <%=i==pageNum ? "active":"" %>">
 					<a class="page-link"href="list.jsp?pageNum=<%=i %>"><%=i %></a>
 				</li>
 			<%} %>
-			<li>
-				<a href=""></a>
-			</li>
+			<%if(endPageNum < totalPageCount){ %>
+			<li class="page-item"><a class="page-link" href="list.jsp?pageNum=<%=endPageNum+1%>">Next</a></li>
+			<%}else{ %>
+			<li class="page-item disabled"><a class="page-link" href="list.jsp?pageNum=<%=endPageNum+1%>">Next</a></li>
+			<%} %>
+			
 		</ul>
 	</div>
 	 <jsp:include page="/include/footer.jsp"></jsp:include>
