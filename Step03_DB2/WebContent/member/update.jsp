@@ -7,6 +7,7 @@
 	int num = Integer.parseInt(request.getParameter("num"));
 	String name = request.getParameter("name");
 	String addr = request.getParameter("addr");
+	
 	MemberDao dao = MemberDao.getInstance();
 	MemberDto dto = new MemberDto();
 	dto.setNum(num);
