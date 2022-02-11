@@ -57,7 +57,7 @@ public class TodoDao {
 		try {
 			conn=new DbcpBean().getConn();
 			String sql="UPDATE todo"
-					+ " SET content=?, TO_DATE(?,'YY.MM.DD HH24:MI') AS start_date, TO_DATE(?,'YY.MM.DD HH24:MI') AS final_date,regdate=SYSDATE"
+					+ " SET content=?, start_date=TO_DATE(?,'YY.MM.DD HH24:MI'), final_date=TO_DATE(?,'YY.MM.DD HH24:MI'),regdate=SYSDATE"
 					+ " WHERE num=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getContent());
