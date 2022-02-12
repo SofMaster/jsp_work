@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import test.member.dto.MemberDto;
 import test.todo.dto.TodoDto;
 import test.util.DbcpBean;
 
@@ -190,8 +191,92 @@ public class TodoDao {
 		      return list;
 		   }
 	
-	
-	
+	   public List<TodoDto> getList(TodoDto dto){
+		      List<TodoDto> list=new ArrayList<TodoDto>();
+		      
+		      Connection conn = null;
+		      PreparedStatement pstmt = null;
+		      ResultSet rs = null;
+		      try {
+		         //Connection 객체의 참조값 얻어오기 
+		         conn = new DbcpBean().getConn();
+		         //실행할 sql 문 준비
+		         String sql = "SELECT *" + 
+		               " FROM" + 
+		               "   (SELECT result1.*, ROWNUM rnum" + 
+		               "   FROM" + 
+		               "      (SELECT num,content,start_date,final_date,regdate" + 
+		               "      FROM todo" + 
+		               "      ORDER BY num ASC) result1)" + 
+		               " WHERE rnum BETWEEN ? AND ?";
+		         pstmt = conn.prepareStatement(sql);
+		         //? 에 값 바인딩하기
+		         pstmt.setInt(1, dto.getStartRowNum());
+		         pstmt.setInt(2, dto.getEndRowNum());
+		         //query 문 수행하고 결과 받아오기 
+		         rs = pstmt.executeQuery();
+		         while (rs.next()) {
+		            TodoDto dto2=new TodoDto();
+		            dto2.setNum(rs.getInt("num"));
+					dto2.setContent(rs.getString("content"));
+					dto2.setStart_date(rs.getString("start_date"));
+					dto2.setFinal_date(rs.getString("final_date"));
+					dto2.setRegdate(rs.getString("regdate"));
+		            list.add(dto2);
+		         }
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         try {
+		            if (rs != null)
+		               rs.close();
+		            if (pstmt != null)
+		               pstmt.close();
+		            if (conn != null)
+		               conn.close();
+		         } catch (Exception e) {
+		         }
+		      }
+
+		      
+		      return list;
+		   }   
+		   
+	   public int getCount() {
+			
+			int count=0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				//Connection 객체의 참조값 얻어오기 
+				conn = new DbcpBean().getConn();
+				//실행할 sql 문 준비
+				String sql = "SELECT MAX(ROWNUM) AS num FROM todo";
+				pstmt = conn.prepareStatement(sql);
+				//? 에 값 바인딩하기
+
+				//query 문 수행하고 결과 받아오기 
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					count=rs.getInt("num");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+
+			return count;
+		}
 	
 	
 	
