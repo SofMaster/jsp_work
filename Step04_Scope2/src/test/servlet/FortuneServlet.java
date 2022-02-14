@@ -15,14 +15,16 @@ public class FortuneServlet extends HttpServlet{
    @Override
    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       //1. 오늘의 운세를 얻어오는 비즈니스로직을 수행했다고 가정하자
-      String fortuneToday="동쪽으로 가면 귀인을 만나요.";
+      String a="동쪽으로 가면 귀인을 만나요.";
       
       //2. 로직의 수행결과 데이터(모델)을 httpservletrequest 객체에 담는다
-      req.setAttribute("fortuneToday", fortuneToday);
+      req.setAttribute("fortuneToday", a);
       
       //3. 요청 전달자 객체 (RequestDispatcher)
-            //getRequestDispatcher("요청을 전달받을 WebContent 안에 있는 jsp페이지의 위치")
+      //getRequestDispatcher("요청을 전달받을 WebContent 안에 있는 jsp페이지의 위치")
       RequestDispatcher rd=req.getRequestDispatcher("/test/fortune.jsp");
+      
+      // 지정된 jsp 페이지로 응답을 위임 시킨다.
       rd.forward(req, resp);
       
       

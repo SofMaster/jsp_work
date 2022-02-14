@@ -59,8 +59,8 @@
 	<div class="container">	
 		
 		<div class="bg-secondary bg-opacity-10 mt-5" style="width:1295px;height:220px;text-align:center;">
-			<h1 class="fw-bold pt-2 text-dark " style="font-size:80px; ">Todo-List 
-				<svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="3rem" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16" color="#017BFF">
+			<h1 class="fw-bold pt-2 text-dark " style="font-size:80px; vertical-align:center; ">Todo-List 
+				<svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="3rem" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16" color="#017BFF" style="vertical-align:center;">
   					<path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
   					<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
  					<path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
@@ -116,25 +116,26 @@
 				<%} %>
 			</tbody>
 		</table>
-		<ul class="pagination">
-			<%if(startPageNum !=1){ %>
-			<li class="page-item"><a class="page-link" href="list.jsp?pageNum=<%=startPageNum-1%>">Prev</a></li>
-			<%}else{ %>
-			<li class="page-item disabled"><a class="page-link" href="list.jsp?pageNum=<%=startPageNum-1%>">Prev</a></li>
-			<%} %>
-			
-			<%for(int i=startPageNum;i<=endPageNum;i++){ %>
-				<li class="page-item <%=i==pageNum ? "active":"" %>">
-					<a class="page-link"href="list.jsp?pageNum=<%=i %>"><%=i %></a>
-				</li>
-			<%} %>
-			<%if(endPageNum < totalPageCount){ %>
-			<li class="page-item"><a class="page-link" href="list.jsp?pageNum=<%=endPageNum+1%>">Next</a></li>
-			<%}else{ %>
-			<li class="page-item disabled"><a class="page-link" href="list.jsp?pageNum=<%=endPageNum+1%>">Next</a></li>
-			<%} %>
-			
+		<div >	
+			<ul class="pagination" style="display:flex; text-align:center;">
+				<%if(startPageNum !=1){ %>
+					<li class="page-item"><a class="page-link" href="list.jsp?pageNum=<%=startPageNum-1%>">Prev</a></li>
+				<%}else{ %>
+					<li class="page-item disabled"><a class="page-link" href="list.jsp?pageNum=<%=startPageNum-1%>">Prev</a></li>
+				<%} %>
+				
+				<%for(int i=startPageNum;i<=endPageNum;i++){ %>
+					<li class="page-item <%=i==pageNum ? "active":"" %>">
+						<a class="page-link"href="list.jsp?pageNum=<%=i %>"><%=i %></a>
+					</li>
+				<%} %>
+				<%if(endPageNum < totalPageCount){ %>
+					<li class="page-item"><a class="page-link" href="list.jsp?pageNum=<%=endPageNum+1%>">Next</a></li>
+				<%}else{ %>
+					<li class="page-item disabled"><a class="page-link" href="list.jsp?pageNum=<%=endPageNum+1%>">Next</a></li>
+				<%} %>
 		</ul>
+		</div>
 	</div>
 	 <jsp:include page="/include/footer.jsp"></jsp:include>
 </body>
