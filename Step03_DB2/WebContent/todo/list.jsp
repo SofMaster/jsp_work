@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	final int PAGE_ROW_COUNT=10;
+	final int PAGE_ROW_COUNT=5;
 	final int PAGE_DISPLAY_COUNT=5;
 	
 	int pageNum=1;
@@ -49,13 +49,16 @@
 	text-align:center;
 	font-weight:bold;
 }
+.container{
+	
+}
 </style>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 <jsp:include page="/include/navbar.jsp">
 <jsp:param value="todo" name="thisPage"/>
 </jsp:include>
-	
+<main class="flex-shrink-0">
 	<div class="container">	
 		
 		<div class="bg-secondary bg-opacity-10 mt-5" style="width:1295px;height:220px;text-align:center;">
@@ -137,6 +140,7 @@
 		</ul>
 		</div>
 	</div>
+</main>
 	 <jsp:include page="/include/footer.jsp"></jsp:include>
 </body>
 </html>
