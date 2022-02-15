@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>/test/editor_test.jsp</title>
+<style>
+	/* textareq 요소의 크기가 smart editor 의 크기로 결정된다.*/
+	#content{
+		width:992px;
+		height:300px;
+	}
+</style>
 </head>
 <body>
 <div class="container">
