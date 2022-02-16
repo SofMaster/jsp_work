@@ -28,6 +28,7 @@
    		<li><a href="users/signup_form.jsp">회원가입</a></li>
    		<li><a href="private/study.jsp">회원 전용 공간(Study)</a></li>
    		<li><a href="private/game.jsp">회원 전용 공간(Game)</a></li>
+   		<li><a href="test/upload_form.jsp">파일 업로드 테스트</a></li>
 	</ul>
 </div>
 </body>

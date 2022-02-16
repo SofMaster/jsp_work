@@ -19,3 +19,27 @@ CREATE TABLE board_cafe(
 );
 -- 게시글의 번호를 얻어낼 시퀀스
 CREATE SEQUENCE board_cafe_seq;
+
+-- 업로드된 파일의 정보를 저장할 테이블
+CREATE TABLE board_file(
+   num NUMBER PRIMARY KEY,
+   writer VARCHAR2(100) NOT NULL,
+   title VARCHAR2(100) NOT NULL,
+   orgFileName VARCHAR2(100) NOT NULL, -- 원본 파일명
+   saveFileName VARCHAR2(100) NOT NULL, -- 서버에 실제로 저장된 파일명
+   fileSize NUMBER NOT NULL, -- 파일의 크기 
+   regdate DATE
+);
+
+CREATE SEQUENCE board_file_seq;
+
+-- 이미지 겔러리를 만들기 위한 테이블 
+CREATE TABLE board_gallery(
+   num NUMBER PRIMARY KEY,
+   writer VARCHAR2(100),
+   caption VARCHAR2(100), -- 이미지에 대한 설명
+   imagePath VARCHAR2(100), -- 업로드된 이미지의 경로  ex) /upload/xxx.jpg
+   regdate DATE -- 이미지 업로드 날짜 
+);
+
+CREATE SEQUENCE board_gallery_seq;
