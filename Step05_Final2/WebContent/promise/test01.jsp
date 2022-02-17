@@ -8,32 +8,49 @@
 </head>
 <body>
 <h1>비동기 테스트</h1>
+
 <script>
-	//주어진 어떤 작업을 하는 함수 (첫번째 인자로는 작업내용, 두번째 인자로는 그 작업이 끝났을때 호출해야할 함수)
+	//주어진 작업을 처리 하는 함수 (주어진 작업을 처리하는데 5초가 걸린다고 가정하자)
 	function work(job, callback){
-		//작업을 끝마치는데 걸리는 시간이 불확실 하다고 가정하자
-		let time=Math.random()*5000; //0~5000 사이
-		//작업을 하는데 약간의 시간이 필요하다고 가정하자
+		// 5 초 지연시켜서 함수 호출하기 
 		setTimeout(function(){
 			console.log(job+" 을(를) 수행 완료 했습니다.");
-			//콜백함수 호출해 주기
 			callback();
-		}, time);
+		}, 1000);
 	}
-	
-	work("냉장고 문을 열기", function(){
-		work("상규를 가두기", function(){
-			work("냉장고 문을 닫기", function(){
-				work("트럭에 냉장고를 싣는다",function(){
-					work("냉장고를 배에 실어서 보낸다",function(){
-						
-					});
-				});
+	/*
+	work("달리기", function(){
+		work("쉬기", function(){
+			work("물마시기",function(){
+				
 			});
 		});
 	});
+	*/
 	
+	//1. Promise 객체를 생성해서 참조값을 p1 에 담기
+	let p1=new Promise(function(resolve){
+		/*
+			함수의 인자로 전달되는 resolve는 함수이다.
+			resolve 는 작업을 완료 했을때 호출 해야하는 함수
+			resolve 함수가 호출되면 .then() 안에 있는 함수가 자동 호출된다.
+		*/
+		resolve();
+		console.log("resolve 함수를 호출 했습니다.");
+	}); 
+	//2. p1 Promse 가 resolve 되었을때 호출되는 함수 등록
+	p1.then(function(){
+		console.log("then 안에 있는 함수가 호출되었습니다.");
+	});
 	
+	console.log("bye!");
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
